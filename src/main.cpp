@@ -49,18 +49,20 @@ void TimerCallback() {
     }
 }
 
-void OnBombPlanted(Player *player, unsigned short site) {
-    print("%s planted a bomb.\n", player->GetName());
+void OnBombPlanted(Player *player, unsigned short site)
+{
+    g_playerManager->SendMsg(HUD_PRINTTALK, FetchTranslation("c4events.plant.message"), config->Fetch<const char*>("c4events.prefix"), player->GetName());
+    print("%s planted a bomb.\n", player->GetName()); // credits to blu
     print("UNIX Time: %llu\n", GetTime());
-    elapsedTime = 5;
+    elapsedTime = server->cvars->GetConvarInt("mp_c4timer");
     timerid = timers->RegisterTimer(1000, TimerCallback);  
     print("Timer registered.\n");
-    print("UNIX Time: %llu\n", GetTime());
+    print("UNIX Time: %llu\n", GetTime()); //
 }
 
 void OnPluginStop()
 {
-    timers->UnregisterTimers();
+    timers->UnregisterTimers(); // ts
 }
 
 const char *GetPluginAuthor()
