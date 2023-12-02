@@ -37,13 +37,13 @@ void Timer()
 }
 
 void TimerCallback(int timerid, int remainingTime) {
-    print("Remaining time: %d seconds\n", remainingTime / 1000);
+    print("Remaining time: %d seconds\n", remainingTime);
 }
 
 void OnBombPlanted(Player *player, unsigned short site) {
     print("%s planted a bomb.\n", player->GetName());
     for (int i = 0; i < 40; i++) {
-        timers->RegisterTimer(1000 * (i + 1), TimerCallback);
+        timers->RegisterTimer(1000 * (i + 1), [i]() { TimerCallback(i, 40 - i); });
     }
 }
 
