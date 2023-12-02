@@ -41,7 +41,7 @@ int elapsedTime = 40;
 
 void TimerCallback() {
     g_playerManager->SendMsg(HUD_PRINTTALK, "Remaining time: %d seconds\n", elapsedTime);
-    print("Remaining time: %d seconds\n", elapsedTime)
+    print("Remaining time: %d seconds\n", elapsedTime);
     elapsedTime--;  // decrement elapsedTime
     if (elapsedTime == 0) {
         timers->DestroyTimer(timerid);
