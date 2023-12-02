@@ -33,18 +33,14 @@ void OnPluginStart()
 void Timer()
 {
     print("There are %02d players on the server.\n", g_playerManager->GetPlayers());
-    timers->DestroyTimer(timerid);
 }
 
-void TimerCallback(int timerid, int remainingTime) {
-    print("Remaining time: %d seconds\n", remainingTime);
-}
-
-void OnBombPlanted(Player *player, unsigned short site) {
+void OnBombPlanted(Player *player, unsigned short site)
+{
     print("%s planted a bomb.\n", player->GetName());
-    for (int i = 0; i < 40; i++) {
-        timers->RegisterTimer(1000 * (i + 1), [i]() { TimerCallback(i, 40 - i); });
-    }
+    timers->RegisterTimer(50000, Timer);
+    print("Timer registered.\n");
+   
 }
 
 
