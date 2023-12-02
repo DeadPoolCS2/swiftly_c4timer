@@ -37,7 +37,7 @@ void Timer()
 
 unsigned long long timerid;
 
-int elapsedTime = 40;
+int elapsedTime = 5;
 
 void TimerCallback() {
     g_playerManager->SendMsg(HUD_PRINTTALK, "Remaining time: %d seconds\n", elapsedTime);
@@ -52,7 +52,7 @@ void TimerCallback() {
 void OnBombPlanted(Player *player, unsigned short site) {
     print("%s planted a bomb.\n", player->GetName());
     print("UNIX Time: %llu\n", GetTime());
-    elapsedTime = 40;
+    elapsedTime = 5;
     timerid = timers->RegisterTimer(1000, TimerCallback);  
     print("Timer registered.\n");
     print("UNIX Time: %llu\n", GetTime());
