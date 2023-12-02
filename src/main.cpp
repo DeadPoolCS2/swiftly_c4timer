@@ -53,7 +53,7 @@ void OnBombPlanted(Player *player, unsigned short site) {
     print("%s planted a bomb.\n", player->GetName());
     print("UNIX Time: %llu\n", GetTime());
     elapsedTime = 40;
-    timerid = timers->RegisterTimer(10, TimerCallback);  
+    timerid = timers->RegisterTimer(1000, TimerCallback);  
     print("Timer registered.\n");
     print("UNIX Time: %llu\n", GetTime());
 }
