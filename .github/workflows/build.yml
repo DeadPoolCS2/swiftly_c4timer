@@ -15,9 +15,8 @@ jobs:
         strategy:
             fail-fast: false
             matrix:
-                os: [ubuntu-latest, windows-latest]
+                os: [ubuntu-latest]
                 include:
-                    - os: windows-latest
                     - os: ubuntu-latest
                       container: registry.gitlab.steamos.cloud/steamrt/sniper/sdk
 
@@ -51,9 +50,3 @@ jobs:
                   name: c4timer Plugin - Linux
                   path: ${{ github.workspace }}/c4timer/output/c4timer.so
 
-            - name: Upload Files - Windows
-              if: matrix.os == 'windows-latest'
-              uses: actions/upload-artifact@v3
-              with:
-                  name: c4timer Plugin - Windows
-                  path: ${{ github.workspace }}/c4timer/output/c4timer.dll
