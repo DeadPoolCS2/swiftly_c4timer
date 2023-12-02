@@ -40,7 +40,7 @@ unsigned long long timerid;
 int elapsedTime = 40;
 
 void TimerCallback() {
-    print("Remaining time: %d seconds\n", elapsedTime);
+    player->SendMsg(HUD_PRINTTALK, "Remaining time: %d seconds\n", elapsedTime);
     elapsedTime--;  // decrement elapsedTime
     if (elapsedTime == 0) {
         timers->DestroyTimer(timerid);
