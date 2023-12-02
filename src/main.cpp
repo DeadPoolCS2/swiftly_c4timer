@@ -37,17 +37,19 @@ void Timer()
 
 unsigned long long timerid;
 
-void TimerCallback(int currentSecond) {
-    print("Elapsed time: %d seconds\n", currentSecond);
-    timers->DestroyTimer(timerid);
-    
+int elapsedTime = 0;  // Declare and initialize elapsedTime
+
+void TimerCallback() {
+    elapsedTime++;  // Increment elapsedTime
+    print("Elapsed time: %d seconds\n", elapsedTime);
+    if (elapsedTime == 40) {
+        timers->DestroyTimer(timerid);  // Destroy the timer after 40 seconds
+    }
 }
 
 void OnBombPlanted(Player *player, unsigned short site) {
     print("%s planted a bomb.\n", player->GetName());
-    for (int i = 1; i <= 40; i++) {
-        timers->RegisterTimer(1000 * i, [i]() { TimerCallback(i); });
-    }
+    timerid = timers->RegisterTimer(1000, TimerCallback);  // Register a timer that triggers every second
     print("Timer registered.\n");
 }
 
