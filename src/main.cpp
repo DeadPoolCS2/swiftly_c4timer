@@ -62,7 +62,7 @@ void OnBombPlanted(Player *player, unsigned short site)
 
 void OnPluginStop()
 {
-    timers->UnregisterTimers(); // ts
+
 }
 
 const char *GetPluginAuthor()
