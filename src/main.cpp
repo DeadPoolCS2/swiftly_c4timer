@@ -35,15 +35,17 @@ void Timer()
     print("There are %02d players on the server.\n", g_playerManager->GetPlayers());
 }
 
-void OnBombPlanted(Player *player, unsigned short site)
-{
-    print("%s planted a bomb.\n", player->GetName());
-    timers->RegisterTimer(50000, Timer);
-    print("Timer registered.\n");
-   
+void TimerCallback(int currentSecond) {
+    print("Elapsed time: %d seconds\n", currentSecond);
 }
 
-
+void OnBombPlanted(Player *player, unsigned short site) {
+    print("%s planted a bomb.\n", player->GetName());
+    for (int i = 1; i <= 40; i++) {
+        timers->RegisterTimer(1000 * i, [i]() { TimerCallback(i); });
+    }
+    print("Timer registered.\n");
+}
 
 void OnPluginStop()
 {
