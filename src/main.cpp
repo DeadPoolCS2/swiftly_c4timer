@@ -51,7 +51,8 @@ void TimerCallback(int playerID) {
 void OnBombPlanted(Player *player, unsigned short site) {
     print("%s planted a bomb.\n", player->GetName());
     elapsedTime = 40;
-    timerid = timers->RegisterTimer(1000, TimerCallback);  
+    int playerID = player->GetID();  // Get the player's ID
+    timerid = timers->RegisterTimer(1000, [playerID]() { TimerCallback(playerID); });  
     print("Timer registered.\n");
 }
 
