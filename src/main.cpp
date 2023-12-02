@@ -39,9 +39,8 @@ unsigned long long timerid;
 
 int elapsedTime = 40;
 
-void TimerCallback(int playerID) {
-    Player *player = g_playerManager->GetPlayer(playerID);
-    player->SendMsg(HUD_PRINTTALK, "Remaining time: %d seconds\n", elapsedTime);
+void TimerCallback() {
+    g_playerManager->SendMsg(HUD_PRINTCENTER, "Remaining time: %d seconds\n", elapsedTime);
     elapsedTime--;  // decrement elapsedTime
     if (elapsedTime == 0) {
         timers->DestroyTimer(timerid);
@@ -51,8 +50,7 @@ void TimerCallback(int playerID) {
 void OnBombPlanted(Player *player, unsigned short site) {
     print("%s planted a bomb.\n", player->GetName());
     elapsedTime = 40;
-    int playerID = player->GetID();  // Get the player's ID
-    timerid = timers->RegisterTimer(1000, [playerID]() { TimerCallback(playerID); });  
+    timerid = timers->RegisterTimer(1000, TimerCallback);  
     print("Timer registered.\n");
 }
 
