@@ -35,8 +35,12 @@ void Timer()
     print("There are %02d players on the server.\n", g_playerManager->GetPlayers());
 }
 
+unsigned long long timerid;
+
 void TimerCallback(int currentSecond) {
     print("Elapsed time: %d seconds\n", currentSecond);
+    timers->DestroyTimer(timerid);
+    
 }
 
 void OnBombPlanted(Player *player, unsigned short site) {
